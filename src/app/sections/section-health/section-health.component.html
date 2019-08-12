@@ -1,1 +1,10 @@
-<p>section-health works!</p>
+<div class="section-container">
+    <h2> System Health</h2>
+    <div class="card-deck server">
+        <div *ngFor="let server of servers" class="card mb-3 shadow card-theme">
+          <app-server [serverInput]="server" > </app-server>
+        </div>
+
+    </div>
+
+  </div>
