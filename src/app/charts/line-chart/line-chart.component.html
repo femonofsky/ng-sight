@@ -1,1 +1,11 @@
-<p>line-chart works!</p>
+<div class="chartn">
+    <canvas baseChart
+      style="width:100%;height:100%;"
+      [datasets]="lineChartData"
+      [labels]="lineChartLabels"
+      [options]="lineChartOptions"
+      [colors]="lineChartColors"
+      [legend]="lineChartLegend"
+      [chartType]="lineChartType">
+    </canvas>
+  </div>
