@@ -48,20 +48,21 @@ export class PaginationComponent implements OnInit {
   getPages(): number[] {
     const totalPages = Math.ceil(this.count / this.perPage);
     const thisPage = this.page || 1;
+
     const pageToShow = this.pagesToShow || 9;
     const pages: number[] = [];
     pages.push(thisPage);
 
     for (let i = 0; i < pageToShow - 1; i++) {
+
       if (pages.length < pageToShow)
       {
         if (Math.min.apply(null, pages) > 1) {
           pages.push(Math.min.apply(null, pages) - 1);
         }
       }
-
       if (pages.length < pageToShow) {
-        if (Math.max.apply(null, pages) > 1) {
+        if (Math.max.apply(null, pages) < totalPages) {
           pages.push(Math.max.apply(null, pages) + 1);
         }
       }
@@ -78,7 +79,7 @@ export class PaginationComponent implements OnInit {
   getMax(): number {
     let max = this.perPage * this.page;
     if (max > this.count){
-      max = this.count
+      max = this.count;
     }
     return max;
   }

@@ -5,9 +5,6 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-section-orders',
   templateUrl: './section-orders.component.html',
-  providers: [
-    SaleDataService // added class in the providers
-  ],
   styleUrls: ['./section-orders.component.scss']
 })
 export class SectionOrdersComponent implements OnInit {

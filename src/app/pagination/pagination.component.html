@@ -1,6 +1,6 @@
 <div class="pages">
   <span class="page-counts"> {{ getMin() }} through  {{ getMax()}} of {{ count}} Orders</span>
-  <span class="page-totals">{{ totalPages() }}</span>
+  <span class="page-totals"> {{ totalPages() }} total pages</span>
   <div class="pagination" *ngIf="count > 0">
       <button class="btn btn-small btn-info"
         (click)="onPrev()"
@@ -11,7 +11,7 @@
       class="btn btn-small btn-info btn-pageNumber"
       *ngFor="let pageNum of getPages()"
       (click)="onPage(pageNum)"
-      [ngClass]="{'activate': pageNum === page, 'disabled':loading}"
+      [ngClass]="{'activate': pageNum == page, 'disabled':loading}"
       >{{ pageNum }}</button>
     <button class="btn btn-small btn-info"
       (click)="onNext()"
