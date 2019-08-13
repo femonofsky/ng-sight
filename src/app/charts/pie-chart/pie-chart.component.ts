@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
+import _ from 'lodash';
 @Component({
   selector: 'app-pie-chart',
   templateUrl: './pie-chart.component.html',
@@ -9,8 +10,10 @@ export class PieChartComponent implements OnInit {
 
   constructor() { }
 
-  public pieChartData: number[] = [350, 450, 120];
-  public pieChartLabels: string[] = ['XYZ Logistics', 'Main st Bakery', 'Acme Hosting'];
+  @Input() inputData: any;
+  @Input() limit: number;
+  public pieChartData: number[];
+  public pieChartLabels: string[];
   public pieChartType = 'doughnut';
   public colors: any[] = [
     {
@@ -21,6 +24,13 @@ export class PieChartComponent implements OnInit {
     }
    ];
    ngOnInit() {
+     this.parseChartData(this.inputData, this.limit);
   }
 
+  parseChartData(res:any, limit?: number) {
+    const allData = res.slice(-limit);
+
+    this.pieChartData = allData.map(x => _.values(x)[1]);
+    this.pieChartLabels = allData.map(x => _.values(x)[0]);
+  }
 }

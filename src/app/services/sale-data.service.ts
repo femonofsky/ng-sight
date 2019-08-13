@@ -13,5 +13,13 @@ export class SaleDataService {
   getOrders(pageIndex: number, pageSize: number) {
     return this._http.get( this.baseUrl + pageIndex + '/' + pageSize);
   }
+
+  getOrdersByCustomer(n: number) {
+    return this._http.get( this.baseUrl + 'ByCustomer' + '/' + n);
+  }
+
+  getOrdersByState() {
+    return this._http.get( this.baseUrl + 'ByState');
+  }
 }
 
