@@ -1,23 +1,43 @@
+import { ServerMessage } from './../../shared/server-message';
+import { ServerService } from './../../services/server.service';
 import { Server } from './../../shared/server';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { timer, Subscription } from 'rxjs';
 @Component({
   selector: 'app-section-health',
   templateUrl: './section-health.component.html',
   styleUrls: ['./section-health.component.scss']
 })
-export class SectionHealthComponent implements OnInit {
+export class SectionHealthComponent implements OnInit, OnDestroy  {
 
-  constructor() { }
+  constructor(private _serverService: ServerService) { }
 
-  servers: Server[] = [
-    { id: 1, name: 'dev-web', isOnline: true},
-    { id: 2, name: 'prod-web', isOnline: false},
-    { id: 3, name: 'dev-mail', isOnline: true},
-    { id: 4, name: 'prod-web', isOnline: true}
-  ];
-
+  servers: Server[];
+  timeSubscription: Subscription;
 
   ngOnInit() {
+    this.refreshData();
+  }
+  ngOnDestroy(): void {
+    if (this.timeSubscription) {
+      this.timeSubscription.unsubscribe();
+    }
   }
 
+  refreshData() {
+    this._serverService.getServers().subscribe( result => {
+      console.log(result);
+      this.servers = result;
+    });
+    this.subscribeToData();
+  }
+
+  subscribeToData() {
+    this.timeSubscription = timer(5000).subscribe( () => this.refreshData());
+  }
+
+  sendMessage(msg: ServerMessage) {
+    this._serverService.handleSendMessage(msg)
+      .subscribe( res => console.log(res));
+  }
 }
