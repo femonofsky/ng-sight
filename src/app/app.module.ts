@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { SaleDataService } from './services/sale-data.service';
+import { ServerService } from './services/sale-data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
@@ -39,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [
     SaleDataService,
+    ServerService,
     // HttpClient
   ],
   bootstrap: [AppComponent]
